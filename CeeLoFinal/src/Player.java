@@ -32,12 +32,36 @@ public class Player {
 		return balance;
 	}
 	
+	public double getBet() {
+		return bet;
+	}
+	
+	public void setBet(double bet) {
+		if (bet < 0 || bet > balance) {
+			this.bet = 0;
+		} else {
+			this.bet = bet;
+		}
+	}
+	
+	public void withdraw(double amount) {
+		balance -= amount;
+	}
+	
+	public void deposit(double amount) {
+		balance += amount;
+	}
+	
 	public void roll() {
 		Random rand = new Random();
 		for (int i = 0; i < roll.size(); i++) {
 			roll.set(i, rand.nextInt(6) + 1);
 		}
 		sort(roll.size());
+	}
+	
+	public ArrayList<Integer> getRoll() {
+		return roll;
 	}
 	
 	private void sort(int n) 
@@ -55,4 +79,9 @@ public class Player {
 		if (count == 0) return;
         sort(n - 1); 
     }
+	
+	public String toString() {
+		return "Name: " + name + "\nBalance: " + balance + "\nBet: " + bet;
+	}
+
 }
