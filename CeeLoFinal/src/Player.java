@@ -14,11 +14,6 @@ public class Player {
 		}
 	};
 	
-	Player (){
-		this.name = "Albert";
-		this.balance = 10;
-		this.bet = 10;
-	}
 	
 	public void roll() {
 		Random rand = new Random();
@@ -44,3 +39,27 @@ public class Player {
         sort(n - 1); 
     }
 }
+
+	public Player () {
+		score = 0;
+		balance = 1000;
+		name = "";
+		ScoreBoard = new StringBuilder();
+	}
+	public Player(String Name,int Balance) {
+		score = 0;
+		balance = Balance;
+		name = Name;
+		
+	}
+	public String getName() {
+		return name;
+		
+	}
+	public int getScore() {
+		return score;
+	}	
+	public int getBalance() {
+		return balance;
+		
+	}
