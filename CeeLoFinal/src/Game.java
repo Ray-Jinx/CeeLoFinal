@@ -2,9 +2,8 @@
 public class Game {
 
 	public static void main(String[] args) {
-		System.out.println("Poggers");
-		System.out.println("Gay");
-		System.out.print("Homo");
+		Player play1 = new Player();
+		play1.roll();
 	}
 
 }
