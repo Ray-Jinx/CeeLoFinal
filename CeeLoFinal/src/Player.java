@@ -5,6 +5,16 @@ public class Player {
 	private String name;
 	private double balance;
 	private double bet;
+	StringBuilder ScoreBoard = new StringBuilder();
+	
+	public Player () {
+		this("",1000);
+	}
+	public Player(String name,int balance) {
+		this.balance = balance;
+		this.name = name;
+		
+	}
 	
 	public ArrayList<Integer> roll = new ArrayList<Integer>() {
 		{
@@ -14,6 +24,13 @@ public class Player {
 		}
 	};
 	
+	public String getName() {
+		return name;
+	}
+	
+	public double getBalance() {
+		return balance;
+	}
 	
 	public void roll() {
 		Random rand = new Random();
@@ -39,27 +56,3 @@ public class Player {
         sort(n - 1); 
     }
 }
-
-	public Player () {
-		score = 0;
-		balance = 1000;
-		name = "";
-		ScoreBoard = new StringBuilder();
-	}
-	public Player(String Name,int Balance) {
-		score = 0;
-		balance = Balance;
-		name = Name;
-		
-	}
-	public String getName() {
-		return name;
-		
-	}
-	public int getScore() {
-		return score;
-	}	
-	public int getBalance() {
-		return balance;
-		
-	}
