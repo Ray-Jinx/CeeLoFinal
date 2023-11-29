@@ -3,27 +3,41 @@ import java.util.Arrays;
 
 public class Game {	
 	
-	static Player[] players = new Player[4];
-	static int[] scores = new int[4];
+	public static Player[] players = new Player[4];
+	public static int[] scores = new int[4];
 	
 	public static void main(String[] args) {
+		players[0] = new Player("Alfred", 1000);
+		players[1] = new Player("James", 1000);
+		players[2] = new Player("Henry", 1000);
+		players[3] = new Player("Sean", 1000);
+		for (int i = 0; i < 4; i++) {
+			players[i].setBet(200);
+		}
 		game();
 	}
 	
 	public static void game() {
-		for (int i = 0; i < 4; i++) {
-			players[i] = new Player();
-			players[i].setBet(100);
-		}
-		
 		do {
-			round();
-			Player temp = players[3];
-			for (int i =0;i<3;i++) {
-				players[i]=players[i+1];
+			try {
+				Thread.sleep(1500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-			players[0]=temp;
-		} while (players[0].getBalance() < 0 && players[1].getBalance() < 0 && players[2].getBalance() < 0 && players[3].getBalance() < 0 );
+			System.out.println("New game: \nBanker:");
+			round();
+			Player temp = players[0];
+			for (int i = 0; i < 3 ; i++) {
+				players[i] = players[i+1];
+			}
+			players[3] = temp;
+			
+		} while (
+				players[0].getBalance() > 0 && 
+				players[1].getBalance() > 0 && 
+				players[2].getBalance() > 0 && 
+				players[3].getBalance() > 0
+				);
 	}
 	
 	private static void round() {
@@ -33,7 +47,7 @@ public class Game {
 		
 		roundRoll(0);
 		//Banker
-		if (scores[0] == 0 || scores[0] == 10 || scores[0] == 12 || scores[0] == 13 ) {
+		if (scores[0] == 0 || scores[0] == 10 || scores[0] == 12 || scores[0] == 13 || scores[0] == 1) {
 			for (int i = 1; i < 4; i++) {
 				players[0].withdraw(players[i].getBet());
 				players[i].deposit(players[i].getBet());
@@ -124,7 +138,7 @@ public class Game {
 			score = 13; //evens
 		} else if (roll.get(0) == roll.get(1)){
 			score = roll.get(2); //normal
-		} else if (roll.get(2) == roll.get(1)){
+		} else if (roll.get(1) == roll.get(2)){
 			score = roll.get(0); //normal
 		} else {
 			score = 0;
@@ -141,6 +155,7 @@ public class Game {
 				tries++;
 			}
 		} while (scores[playerIndex] == 0 && tries != 3);
+		scores[playerIndex] = getScore(players[playerIndex]);
 	}
 
 }

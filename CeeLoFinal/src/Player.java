@@ -81,7 +81,7 @@ public class Player {
     }
 	
 	public String toString() {
-		return "Name: " + name + "\nBalance: " + balance + "\nBet: " + bet;
+		return "Name: " + name + "\nBalance: " + balance + "\nBet: " + bet + "\nRoll: " + roll.toString();
 	}
 
 }
