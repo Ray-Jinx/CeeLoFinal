@@ -7,13 +7,18 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import javax.swing.JPanel;
 
 public class LaunchPage implements ActionListener{
 	
 	JFrame frame = new JFrame();	
 	JButton startButton = new JButton("Start Game");
 	JButton howToButton = new JButton("How to Play");
-	Image backgroundImage;
+	ImageIcon backgroundImage;
 	
 	LaunchPage(){
 		
@@ -23,14 +28,19 @@ public class LaunchPage implements ActionListener{
 		howToButton.setBounds(578,500,125,40);
 		howToButton.setFocusable(false);
 		howToButton.addActionListener(this);
-		frame.add(startButton);
-		frame.add(howToButton);
+		frame.getContentPane().add(startButton);
+		frame.getContentPane().add(howToButton);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1280,720);
-		frame.setLayout(null);
-		frame.setVisible(true);
-		backgroundImage = new ImageIcon("CeeLo_title.png").getImage();
+		frame.getContentPane().setLayout(null);
 		
+		JPanel panel = new JPanel();
+		panel.setBounds(295, 136, 696, 332);
+		frame.getContentPane().add(panel);
+		frame.setVisible(true);
+		backgroundImage = new ImageIcon("CeeLo_title.png");
+		panel.add(new JLabel(new ImageIcon("/home/namp/Documents/CIS254/CeeloFinal/CeeloFinal/CeeLoFinal/CeeLoFinal/rsc/CeeLo_title.png")));
+		panel.setVisible(true);
 	}
 	
 	
