@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -8,45 +9,50 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import javax.swing.JPanel;
 
 public class LaunchPage implements ActionListener{
 	
 	JFrame frame = new JFrame();	
 	JButton startButton = new JButton("Start Game");
 	JButton howToButton = new JButton("How to Play");
-	ImageIcon backgroundImage;
+	Image backgroundImage;
+	JLabel background;
+
 	
 	LaunchPage(){
 		
-		startButton.setBounds(578,600,125,40);
+		startButton.setBounds(590,449,125,40);
 		startButton.setFocusable(false);
 		startButton.addActionListener(this);
-		howToButton.setBounds(578,500,125,40);
+		startButton.setBackground(Color.BLACK);
+		startButton.setForeground(Color.WHITE);
+		howToButton.setBounds(1143,12,125,40);
 		howToButton.setFocusable(false);
 		howToButton.addActionListener(this);
+		howToButton.setBackground(Color.BLACK);
+		howToButton.setForeground(Color.WHITE);
 		frame.getContentPane().add(startButton);
 		frame.getContentPane().add(howToButton);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1280,720);
 		frame.getContentPane().setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(295, 136, 696, 332);
-		frame.getContentPane().add(panel);
 		frame.setVisible(true);
-		backgroundImage = new ImageIcon("CeeLo_title.png");
-		panel.add(new JLabel(new ImageIcon("/home/namp/Documents/CIS254/CeeloFinal/CeeloFinal/CeeLoFinal/CeeLoFinal/rsc/CeeLo_title.png")));
-		panel.setVisible(true);
+		ImageIcon backGround = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/Cee_LoTITLE (3).png");
+		background = new JLabel("",backGround,JLabel.CENTER);
+		background.setBounds(0,0, 1280,720);
+		frame.getContentPane().add(background);
+		
 	}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==startButton) {
+			String name = JOptionPane.showInputDialog("Enter Your Name");
+			String value = JOptionPane.showInputDialog("Enter Your Starting value");
+			
 			frame.dispose();
 			GameWindow game = new GameWindow();
 			}
