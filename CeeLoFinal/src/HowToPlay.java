@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class HowToPlay/* implements ActionListener*/{
+public class HowToPlay/* implements ActionListener*/ implements ActionListener{
 	
 	JFrame frame = new JFrame();
 	JLabel label = new JLabel("HI");
@@ -40,15 +40,15 @@ public class HowToPlay/* implements ActionListener*/{
 		frame.getContentPane().add(btnGoBack);
 		frame.setVisible(true);
 		btnGoBack.setFocusable(false);
-		//btnGoBack.addActionListener(this);
+		btnGoBack.addActionListener(this);
 		
 	}
-	/*@Override
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== btnGoBack) {
 			frame.dispose();
 			LaunchPage launch = new LaunchPage();
 			}
-}*/
+}
 }
 
