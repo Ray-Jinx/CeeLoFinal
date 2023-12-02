@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -252,7 +253,11 @@ public class GameWindow implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnRoll) {
-			
+			if (game.getPlayerBalance(0) < 0 || game.getPlayerBalance(1) < 0 || game.getPlayerBalance(2) < 0 || game.getPlayerBalance(3) < 0) {
+				JOptionPane.showMessageDialog(null,"Game has ended! Someone lost all their money! ):","Game Ended!",JOptionPane.YES_OPTION);
+				frame.dispose();
+				LaunchPage home = new LaunchPage();
+			}
 			game.startGame();
 			disPlayBalance(game);
 			moveBank();

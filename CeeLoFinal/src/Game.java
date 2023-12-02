@@ -27,8 +27,13 @@ public class Game {
 				players[i] = players[i+1];
 			}
 			players[3] = temp;
-			for (int i = 1; i < 4; i++) {
-				players[i].setBet(rand.nextInt((int) players[i].getBalance()-1)+1);
+			if (players[0].getBalance() > 0 && 
+				players[1].getBalance() > 0 && 
+				players[2].getBalance() > 0 && 
+				players[3].getBalance() > 0) {
+				for (int i = 1; i < 4; i++) {
+					players[i].setBet(rand.nextInt((int) (players[i].getBalance())));
+				}
 			}
 			
 		} while (
@@ -52,7 +57,7 @@ public class Game {
 		return players[playerIndex].getBet();
 	}
 	
-	public void setPlayeBet(double bet) {
+	public void setPlayerBet(double bet, int playerIndex) {
 		players[playerIndex].setBet(bet);
 	}
 	
