@@ -15,15 +15,12 @@ public class GameWindow implements ActionListener{
 	JLabel label = new JLabel("HI");
 	Image backgroundImage;
 	JLabel background;
-	private JTextField textField;
+	private JTextField playerBet;
 	private JButton btnBet;
 	private JLabel dice1,dice2,dice3;
 	private JLabel lblPlayer_1,lblPlayer_2,lblPlayer_3,lblPlayer_4;
 	private JLabel lblBanker_1,lblBanker_2,lblBanker_3,lblBanker_4;
 	private JLabel lblBets1,lblBets2,lblBets3;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
 	private JButton btnHome = new JButton("Home");
 	private JButton btnRoll = new JButton("Roll");
 	private Game game;
@@ -32,7 +29,8 @@ public class GameWindow implements ActionListener{
 	private JLabel lblBalanceP1,lblBalanceP2,lblBalanceP3,lblBalanceP4;
 	private int bankIndex = 0;
 	private int[] playerIndex = {3,2,1,0};
-	
+	private JLabel cpuBet1,cpuBet2,cpuBet3;
+
 	
 	
 	GameWindow(String userName, double userBalance){
@@ -54,11 +52,26 @@ public class GameWindow implements ActionListener{
 		btnHome.addActionListener(this);
 		frame.getContentPane().add(btnHome);
 		
-		textField = new JTextField();
-		textField.setText("1000");
-		textField.setBounds(771, 633, 114, 21);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		cpuBet1 = new JLabel("1000");
+		cpuBet1.setBounds(48, 211, 60, 17);
+		cpuBet1.setForeground(Color.WHITE);
+		frame.getContentPane().add(cpuBet1);
+		
+		cpuBet2 = new JLabel("1000");
+		cpuBet2.setBounds(393, 96, 60, 17);
+		cpuBet2.setForeground(Color.WHITE);
+		frame.getContentPane().add(cpuBet2);
+		
+		cpuBet3 = new JLabel("1000");
+		cpuBet3.setBounds(1079, 211, 60, 17);
+		cpuBet3.setForeground(Color.WHITE);
+		frame.getContentPane().add(cpuBet3);
+		
+		playerBet = new JTextField();
+		playerBet.setText("1000");
+		playerBet.setBounds(771, 633, 114, 21);
+		frame.getContentPane().add(playerBet);
+		playerBet.setColumns(10);
 		
 		btnBet = new JButton("Bet");
 		btnBet.setBounds(897, 630, 105, 27);
@@ -138,24 +151,6 @@ public class GameWindow implements ActionListener{
 		lblBets3.setBounds(1043, 211, 60, 17);
 		frame.getContentPane().add(lblBets3);
 		
-		textField_1 = new JTextField();
-		textField_1.setText("100");
-		textField_1.setBounds(56, 211, 114, 21);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setText("100");
-		textField_2.setBounds(394, 94, 114, 21);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setText("100");
-		textField_3.setBounds(1080, 211, 114, 21);
-		frame.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
-		
 		
 		
 		
@@ -190,6 +185,8 @@ public class GameWindow implements ActionListener{
 		
 		
 		
+		
+		
 		this.game = new Game(userName, userBalance);
 		disPlayBalance(game);
 		
@@ -216,6 +213,9 @@ public class GameWindow implements ActionListener{
 		lblPlayer_2.setText(game.getPlayerName(playerIndex[2]));
 		lblPlayer_3.setText(game.getPlayerName(playerIndex[1]));
 		lblPlayer_4.setText(game.getPlayerName(playerIndex[0]));
+		//lblBets1.setText();
+		//lblBets2.setText();
+		//lblBets3.setText();
 		
 		int temp = playerIndex[0];
 		for (int i = 0; i < 3 ; i++) {
@@ -256,9 +256,12 @@ public class GameWindow implements ActionListener{
 			game.startGame();
 			disPlayBalance(game);
 			moveBank();
-		} else if(e.getSource()==btnHome) {
+		} else if (e.getSource()==btnHome) {
 			LaunchPage home = new LaunchPage();
 			frame.dispose();
+		} else if (e.getSource()==btnBet) {
+			double theBet = Integer.parseInt(playerBet.getText());
+			
 		}
 		
 	}

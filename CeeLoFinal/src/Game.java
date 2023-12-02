@@ -52,6 +52,10 @@ public class Game {
 		return players[playerIndex].getBet();
 	}
 	
+	public void setPlayeBet(double bet) {
+		players[playerIndex].setBet(bet);
+	}
+	
 	public boolean getRoundEnd() {
 		return roundEnd;
 	}

@@ -5,7 +5,7 @@ public class Player {
 	private String name;
 	private double balance;
 	private double bet;
-	StringBuilder ScoreBoard = new StringBuilder();
+
 	
 	public Player () {
 		this("",1000);
