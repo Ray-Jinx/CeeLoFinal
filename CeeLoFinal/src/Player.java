@@ -10,7 +10,7 @@ public class Player {
 	public Player () {
 		this("",1000);
 	}
-	public Player(String name,int balance) {
+	public Player(String name, double balance) {
 		this.balance = balance;
 		this.name = name;
 		

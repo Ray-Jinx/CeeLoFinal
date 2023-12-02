@@ -19,6 +19,8 @@ public class LaunchPage implements ActionListener{
 	JButton howToButton = new JButton("How to Play");
 	Image backgroundImage;
 	JLabel background;
+	String userName;
+	double userBalance = 0;
 
 	
 	LaunchPage(){
@@ -50,15 +52,26 @@ public class LaunchPage implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==startButton) {
-			String name = JOptionPane.showInputDialog("Enter Your Name");
-			String value = JOptionPane.showInputDialog("Enter Your Starting value");
+			try {
+				do {
+					String userName = JOptionPane.showInputDialog("Enter Your Name");
+					double userBalance = Integer.parseInt(JOptionPane.showInputDialog("Enter Your Starting Balance"));
+					if (!userName.isEmpty() || userBalance != 0) {
+						GameWindow game = new GameWindow(userName,userBalance);
+						frame.dispose();
+					}
+				} while (userName.isEmpty() || userBalance == 0);
+			} catch (Exception e1) {
+				
+			}
 			
-			frame.dispose();
-			GameWindow game = new GameWindow();
 			}
 		else if (e.getSource()==howToButton) {
 			frame.dispose();
+			
 			HowToPlay howTo = new HowToPlay();
 		}
+		
 	}
+	
 }

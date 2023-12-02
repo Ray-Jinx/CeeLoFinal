@@ -1,50 +1,77 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Game {	
 	
-	public static Player[] players = new Player[4];
-	public static int[] scores = new int[4];
-	
-	public static void main(String[] args) {
-		players[0] = new Player("Alfred", 1000);
-		players[1] = new Player("James", 1000);
-		players[2] = new Player("Henry", 1000);
-		players[3] = new Player("Sean", 1000);
-		for (int i = 0; i < 4; i++) {
-			players[i].setBet(200);
-		}
-		game();
+	private Player[] players = new Player[4];
+	private int[] scores = new int[4];
+	private boolean roundEnd, continueRoll, continueGame;
+
+	public Game(String userName, double userBalance) {
+		Random rand = new Random();
+		players[0] = new Player(userName, userBalance);
+		players[1] = new Player("Jenny", rand.nextInt((int) (userBalance))+userBalance*.5);
+		players[2] = new Player("Henry", rand.nextInt((int) (userBalance))+userBalance*.5);
+		players[3] = new Player("Sean", rand.nextInt((int) (userBalance))+userBalance*.5);
 	}
 	
-	public static void game() {
+	public void startGame() {
+		Random rand = new Random();
 		do {
-			try {
-				Thread.sleep(1500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			System.out.println("New game: \nBanker:");
+			roundEnd = false;
 			round();
+			roundEnd = true;
 			Player temp = players[0];
 			for (int i = 0; i < 3 ; i++) {
 				players[i] = players[i+1];
 			}
 			players[3] = temp;
+			for (int i = 1; i < 4; i++) {
+				players[i].setBet(rand.nextInt((int) players[i].getBalance()-1)+1);
+			}
 			
 		} while (
 				players[0].getBalance() > 0 && 
 				players[1].getBalance() > 0 && 
 				players[2].getBalance() > 0 && 
-				players[3].getBalance() > 0
+				players[3].getBalance() > 0 &&
+				continueGame
 				);
 	}
 	
-	private static void round() {
+	public double getPlayerBalance(int playerIndex) {
+		return players[playerIndex].getBalance();
+	}
+	
+	public String getPlayerName(int playerIndex) {
+		return players[playerIndex].getName();
+	}
+	
+	public double getPlayerBet(int playerIndex) {
+		return players[playerIndex].getBet();
+	}
+	
+	public boolean getRoundEnd() {
+		return roundEnd;
+	}
+	
+	public boolean getContinueRoll() {
+		return continueRoll;
+	}
+	
+	public void setContinueGame(boolean cont) {
+		continueGame = cont;
+	}
+	
+	public void setContinueRoll(boolean cont) {
+		continueRoll = cont;
+	}
+	
+	private void round() {
 		for (int i = 0; i < 4; i++) {
 			players[i].roll();
 		}
-		
 		roundRoll(0);
 		//Banker
 		if (scores[0] == 0 || scores[0] == 10 || scores[0] == 12 || scores[0] == 13 || scores[0] == 1) {
@@ -58,9 +85,10 @@ public class Game {
 				players[i].withdraw(players[i].getBet());
 			}
 		} else {
-		roundRoll(1);
-		roundRoll(2);
-		roundRoll(3);
+			roundRoll(1);
+			roundRoll(2);
+			roundRoll(3);
+				
 			if (scores[3] == 13) {
 				scores[3] = 4;
 			}
@@ -91,7 +119,7 @@ public class Game {
 		}
 	}
 	
-	private static void compareScore(int playerIndex) {
+	private void compareScore(int playerIndex) {
 		
 		if (scores[playerIndex] == 8) {
 			players[0].withdraw(players[playerIndex].getBet()*3);
@@ -119,7 +147,7 @@ public class Game {
 		
 	}
 	
-	private static int getScore(Player player) {
+	private int getScore(Player player) {
 		int score;
 		ArrayList<Integer> roll = player.getRoll();
 		if (roll.get(0) == 1 && roll.get(1) == 1 && roll.get(2) == 1) {
@@ -146,7 +174,7 @@ public class Game {
 		return score;
 	} 
 	
-	public static void roundRoll(int playerIndex) { //Roll for each player
+	private void roundRoll(int playerIndex) { //Roll for each player
 		int tries = 0;
 		do {
 			scores[playerIndex] = getScore(players[playerIndex]);
@@ -157,5 +185,7 @@ public class Game {
 		} while (scores[playerIndex] == 0 && tries != 3);
 		scores[playerIndex] = getScore(players[playerIndex]);
 	}
+	
+	
 
 }
