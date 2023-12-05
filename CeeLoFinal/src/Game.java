@@ -205,6 +205,6 @@ public class Game {
 		scores[playerIndex] = getScore(players[playerIndex]);
 	}
 	
-	
+
 
 }
