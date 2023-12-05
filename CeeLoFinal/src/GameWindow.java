@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,7 +18,7 @@ public class GameWindow implements ActionListener{
 	Image backgroundImage;
 	JLabel background;
 	private JTextField playerBet;
-	private JButton btnBet;
+	private JButton btnBet = new JButton("Bet");
 	private JLabel dice1,dice2,dice3;
 	private JLabel lblPlayer_1,lblPlayer_2,lblPlayer_3,lblPlayer_4;
 	private JLabel lblBanker_1,lblBanker_2,lblBanker_3,lblBanker_4;
@@ -27,10 +28,19 @@ public class GameWindow implements ActionListener{
 	private Game game;
 	private String userName;
 	private double userBalance;
+	private double theBet = 1000;
 	private JLabel lblBalanceP1,lblBalanceP2,lblBalanceP3,lblBalanceP4;
 	private int bankIndex = 0;
 	private int[] playerIndex = {3,2,1,0};
 	private JLabel cpuBet1,cpuBet2,cpuBet3;
+	boolean sort = false;
+	ImageIcon diceFace1 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-one.png");
+	ImageIcon diceFace2 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-two.png");
+	ImageIcon diceFace3 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-three.png");
+	ImageIcon diceFace4 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-four.png");
+	ImageIcon diceFace5 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-five.png");
+	ImageIcon diceFace6 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-six.png");
+	
 
 	
 	
@@ -76,6 +86,7 @@ public class GameWindow implements ActionListener{
 		
 		btnBet = new JButton("Bet");
 		btnBet.setBounds(897, 630, 105, 27);
+		btnBet.addActionListener(this);
 		frame.getContentPane().add(btnBet);
 		
 		dice1 = new JLabel("dice1");
@@ -206,6 +217,7 @@ public class GameWindow implements ActionListener{
 	
 	private void disPlayBalance(Game game){
 		
+		
 		lblBalanceP1.setText("Balance: " + game.getPlayerBalance(playerIndex[3]));
 		lblBalanceP2.setText("Balance: " + game.getPlayerBalance(playerIndex[2]));
 		lblBalanceP3.setText("Balance: " + game.getPlayerBalance(playerIndex[1]));
@@ -214,15 +226,19 @@ public class GameWindow implements ActionListener{
 		lblPlayer_2.setText(game.getPlayerName(playerIndex[2]));
 		lblPlayer_3.setText(game.getPlayerName(playerIndex[1]));
 		lblPlayer_4.setText(game.getPlayerName(playerIndex[0]));
-		//lblBets1.setText();
-		//lblBets2.setText();
-		//lblBets3.setText();
 		
+		cpuBet1.setText(""+game.getPlayerBet(playerIndex[3]));
+		cpuBet2.setText(""+game.getPlayerBet(playerIndex[2]));
+		cpuBet3.setText(""+game.getPlayerBet(playerIndex[1]));
+		
+		if (sort == true) {
 		int temp = playerIndex[0];
 		for (int i = 0; i < 3 ; i++) {
 			this.playerIndex[i] = this.playerIndex[i+1];
 		}
 		this.playerIndex[3] = temp;
+		}
+		sort = true;
 	}
 	
 	
@@ -251,6 +267,71 @@ public class GameWindow implements ActionListener{
 		
 	}
 	
+	public void displayDice() {
+		ArrayList<Integer> roll = Player.getRoll();
+		
+		if (roll[0] == 1) {
+			dice1 = new JLabel("",diceFace1,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[0] == 2) {
+			dice1 = new JLabel("",diceFace2,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[0] ==3) {
+			dice1 = new JLabel("",diceFace3,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[0] ==4) {
+			dice1 = new JLabel("",diceFace4,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[0] ==5) {
+			dice1 = new JLabel("",diceFace5,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[0] ==6) {
+			dice1 = new JLabel("",diceFace6,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} 
+		
+		if (roll[1] == 1) {
+			dice2 = new JLabel("",diceFace1,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[1] == 2) {
+			dice2 = new JLabel("",diceFace2,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[1] ==3) {
+			dice2 = new JLabel("",diceFace3,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[1] ==4) {
+			dice2 = new JLabel("",diceFace4,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[1] ==5) {
+			dice2 = new JLabel("",diceFace5,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[1] ==6) {
+			dice2 = new JLabel("",diceFace6,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} 
+		
+		if (roll[2] == 1) {
+			dice3 = new JLabel("",diceFace1,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[2] == 2) {
+			dice3 = new JLabel("",diceFace2,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[2] ==3) {
+			dice3 = new JLabel("",diceFace3,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[2] ==4) {
+			dice3 = new JLabel("",diceFace4,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[2] ==5) {
+			dice3 = new JLabel("",diceFace5,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} else if (roll[2] ==6) {
+			dice3 = new JLabel("",diceFace6,JLabel.CENTER);
+			frame.getContentPane().add(dice1);
+		} 
+		
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnRoll) {
 			if (game.getPlayerBalance(0) < 0 || game.getPlayerBalance(1) < 0 || game.getPlayerBalance(2) < 0 || game.getPlayerBalance(3) < 0) {
@@ -258,14 +339,20 @@ public class GameWindow implements ActionListener{
 				frame.dispose();
 				LaunchPage home = new LaunchPage();
 			}
-			game.startGame();
 			disPlayBalance(game);
+			try {
+				game.startGame(theBet, playerIndex[1]);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			moveBank();
 		} else if (e.getSource()==btnHome) {
 			LaunchPage home = new LaunchPage();
 			frame.dispose();
 		} else if (e.getSource()==btnBet) {
-			double theBet = Integer.parseInt(playerBet.getText());
+			theBet = Integer.parseInt(playerBet.getText());
+			System.out.println(theBet);
 			
 		}
 		

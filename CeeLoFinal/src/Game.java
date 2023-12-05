@@ -16,8 +16,19 @@ public class Game {
 		players[3] = new Player("Sean", rand.nextInt((int) (userBalance))+userBalance*.5);
 	}
 	
-	public void startGame() {
+	public void startGame(double playerBet, int playerIndex) throws InterruptedException {
 		Random rand = new Random();
+		players[playerIndex].setBet(playerBet);
+		if (players[0].getBalance() > 0 && 
+			players[1].getBalance() > 0 && 
+			players[2].getBalance() > 0 && 
+			players[3].getBalance() > 0) {
+				for (int i = 0; i < 4; i++) {
+					if (i != playerIndex) {
+						players[i].setBet(rand.nextInt((int) (players[i].getBalance()*0.5)));
+					}
+				}
+			}
 		do {
 			roundEnd = false;
 			round();
@@ -27,6 +38,7 @@ public class Game {
 				players[i] = players[i+1];
 			}
 			players[3] = temp;
+			/*
 			if (players[0].getBalance() > 0 && 
 				players[1].getBalance() > 0 && 
 				players[2].getBalance() > 0 && 
@@ -35,6 +47,7 @@ public class Game {
 					players[i].setBet(rand.nextInt((int) (players[i].getBalance())));
 				}
 			}
+			*/
 			
 		} while (
 				players[0].getBalance() > 0 && 
@@ -43,6 +56,7 @@ public class Game {
 				players[3].getBalance() > 0 &&
 				continueGame
 				);
+		
 	}
 	
 	public double getPlayerBalance(int playerIndex) {
@@ -55,10 +69,6 @@ public class Game {
 	
 	public double getPlayerBet(int playerIndex) {
 		return players[playerIndex].getBet();
-	}
-	
-	public void setPlayerBet(double bet, int playerIndex) {
-		players[playerIndex].setBet(bet);
 	}
 	
 	public boolean getRoundEnd() {
