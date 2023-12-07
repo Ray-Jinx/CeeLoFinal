@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,7 +23,11 @@ public class GameWindow implements ActionListener{
 	JLabel background;
 	private JTextField playerBet;
 	private JButton btnBet = new JButton("Bet");
-	private JLabel dice1,dice2,dice3;
+	private JLabel aDice1,aDice2,aDice3, aDice4,aDice5,aDice6;
+	private JLabel bDice1,bDice2,bDice3, bDice4,bDice5,bDice6;
+	private JLabel cDice1,cDice2,cDice3, cDice4,cDice5,cDice6;
+
+
 	private JLabel lblPlayer_1,lblPlayer_2,lblPlayer_3,lblPlayer_4;
 	private JLabel lblBanker_1,lblBanker_2,lblBanker_3,lblBanker_4;
 	private JLabel lblBets1,lblBets2,lblBets3;
@@ -40,11 +43,36 @@ public class GameWindow implements ActionListener{
 	private JLabel cpuBet1,cpuBet2,cpuBet3;
 	boolean sort = false;
 	ImageIcon diceFace1 = new ImageIcon("rsc/dice-six-faces-one.png");
+	Image image1 = diceFace1.getImage();
+	Image Face1 = image1.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+	ImageIcon face1 = new ImageIcon(Face1);
+	
 	ImageIcon diceFace2 = new ImageIcon("rsc/dice-six-faces-two.png");
+	Image image2 = diceFace2.getImage();
+	Image Face2 = image2.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+	ImageIcon face2 = new ImageIcon(Face2);
+	
 	ImageIcon diceFace3 = new ImageIcon("rsc/dice-six-faces-three.png");
+	Image image3 = diceFace1.getImage();
+	Image Face3 = image3.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+	ImageIcon face3 = new ImageIcon(Face3);
+	
 	ImageIcon diceFace4 = new ImageIcon("rsc/dice-six-faces-four.png");
+	Image image4 = diceFace4.getImage();
+	Image Face4 = image4.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+	ImageIcon face4 = new ImageIcon(Face4);
+	
 	ImageIcon diceFace5 = new ImageIcon("rsc/dice-six-faces-five.png");
+	Image image5 = diceFace5.getImage();
+	Image Face5 = image5.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+	ImageIcon face5 = new ImageIcon(Face5);
+	
 	ImageIcon diceFace6 = new ImageIcon("rsc/dice-six-faces-six.png");
+	Image image6 = diceFace6.getImage();
+	Image Face6 = image6.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+	ImageIcon face6 = new ImageIcon(Face6);
+	
+	ImageIcon backGround = new ImageIcon("rsc/CeeLo_table (1).jpg");
 	
 	private Player[] players = new Player[4];
 	private int[] scores = new int[4];
@@ -100,17 +128,6 @@ public class GameWindow implements ActionListener{
 		btnBet.addActionListener(this);
 		frame.getContentPane().add(btnBet);
 		
-		dice1 = new JLabel("dice1");
-		dice1.setBounds(380, 268, 60, 17);
-		frame.getContentPane().add(dice1);
-		
-		dice2 = new JLabel("dice2");
-		dice2.setBounds(597, 268, 60, 17);
-		frame.getContentPane().add(dice2);
-
-		dice3 = new JLabel("dice3");
-		dice3.setBounds(800, 268, 60, 17);
-		frame.getContentPane().add(dice3);
 		
 		lblPlayer_2 = new JLabel("player2");
 		lblPlayer_2.setForeground(Color.WHITE);
@@ -174,9 +191,96 @@ public class GameWindow implements ActionListener{
 		lblBets3.setBounds(1043, 211, 60, 17);
 		frame.getContentPane().add(lblBets3);
 		
+		aDice1 = new JLabel("",face1,JLabel.CENTER);
+		aDice1.setBounds(280, 268, 141, 221);
+		frame.getContentPane().add(aDice1);
+		aDice1.setVisible(false);
+
+		aDice2 = new JLabel("",face2,JLabel.CENTER);
+		aDice2.setBounds(280, 268, 141, 221);
+		frame.getContentPane().add(aDice2);
+		aDice2.setVisible(false);
+
 		
+		aDice3 = new JLabel("",face3,JLabel.CENTER);
+		aDice3.setBounds(280, 268, 141, 221);
+		frame.getContentPane().add(aDice3);
+		aDice3.setVisible(false);
+
+		aDice4 = new JLabel("",face4,JLabel.CENTER);
+		aDice4.setBounds(280, 268, 141, 221);
+		frame.getContentPane().add(aDice4);
+		aDice4.setVisible(false);
+
+		aDice5 = new JLabel("",face5,JLabel.CENTER);
+		aDice5.setBounds(280, 268, 141, 221);
+		aDice5.setVisible(false);
+
+		aDice6 = new JLabel("",face6,JLabel.CENTER);
+		aDice6.setBounds(280, 268, 141, 221);
+		frame.getContentPane().add(aDice6);
+		aDice6.setVisible(false);
 		
+		bDice1 = new JLabel("",face1,JLabel.CENTER);
+		bDice1.setBounds(280, 268, 141, 221);
+		frame.getContentPane().add(bDice1);
+		bDice1.setVisible(false);
 		
+		bDice2 = new JLabel("",face2,JLabel.CENTER);
+		bDice2.setBounds(580, 268, 141, 221);
+		frame.getContentPane().add(bDice2);
+		bDice2.setVisible(false);
+		
+		bDice3 = new JLabel("",face3,JLabel.CENTER);
+		bDice3.setBounds(580, 268, 141, 221);
+		frame.getContentPane().add(bDice3);
+		bDice3.setVisible(false);
+		
+		bDice4 = new JLabel("",face4,JLabel.CENTER);
+		bDice4.setBounds(580, 268, 141, 221);
+		frame.getContentPane().add(bDice4);
+		bDice4.setVisible(false);
+		
+		bDice5 = new JLabel("",face5,JLabel.CENTER);
+		bDice5.setBounds(580, 268, 141, 221);
+		frame.getContentPane().add(bDice5);
+		bDice5.setVisible(false);
+		
+		bDice6 = new JLabel("",face6,JLabel.CENTER);
+		bDice6.setBounds(580, 268, 141, 221);
+		frame.getContentPane().add(bDice6);
+		bDice6.setVisible(false);
+		
+		cDice1 = new JLabel("",face1,JLabel.CENTER);
+		cDice1.setBounds(880, 268, 141, 221);
+		frame.getContentPane().add(cDice1);
+		cDice1.setVisible(false);
+		
+		cDice2 = new JLabel("",face2,JLabel.CENTER);
+		cDice2.setBounds(880, 268, 141, 221);
+		frame.getContentPane().add(cDice2);
+		cDice2.setVisible(false);
+		
+		cDice3 = new JLabel("",face3,JLabel.CENTER);
+		cDice3.setBounds(880, 268, 141, 221);
+		frame.getContentPane().add(cDice3);
+		cDice3.setVisible(false);
+		
+		cDice4 = new JLabel("",face4,JLabel.CENTER);
+		cDice4.setBounds(880, 268, 141, 221);
+		frame.getContentPane().add(cDice4);
+		cDice4.setVisible(false);
+		
+		cDice5 = new JLabel("",face5,JLabel.CENTER);
+		cDice5.setBounds(880, 268, 141, 221);
+		frame.getContentPane().add(cDice5);
+		cDice5.setVisible(false);
+		
+		cDice6 = new JLabel("",face6,JLabel.CENTER);
+		cDice6.setBounds(880, 268, 141, 221);
+		frame.getContentPane().add(cDice6);
+		cDice6.setVisible(false);
+
 		lblBalanceP2 = new JLabel("Balance: ");
 		lblBalanceP2.setForeground(Color.WHITE);
 		lblBalanceP2.setBounds(12, 247, 158, 17);
@@ -199,8 +303,9 @@ public class GameWindow implements ActionListener{
 		
 		
 		
+
 		
-		ImageIcon backGround = new ImageIcon("rsc/CeeLo_table (1).jpg");
+		
 		background = new JLabel("",backGround,JLabel.CENTER);
 		background.setBackground(Color.BLACK);
 		background.setBounds(0,0, 1280,720);
@@ -230,6 +335,8 @@ public class GameWindow implements ActionListener{
 		cpuBet2.setText(""+players[playerIndex[1]].getBet());
 		cpuBet3.setText(""+players[playerIndex[0]].getBet());
 		
+		
+		
 	}
 	
 	
@@ -258,72 +365,190 @@ public class GameWindow implements ActionListener{
 		
 	}
 	
-	public void displayDice(int playerIndex) {
+	public void displayDice(int playerIndex){
 		ArrayList<Integer> roll = players[playerIndex].getRoll();
 		
+		System.out.println("This is: "+roll.get(0)+roll.get(1)+roll.get(2));	
+		
 		if (roll.get(0) == 1) {
-			dice1 = new JLabel("",diceFace1,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			aDice2.setVisible(false);
+			aDice3.setVisible(false);
+			aDice4.setVisible(false);
+			aDice5.setVisible(false);
+			aDice6.setVisible(false);
+			aDice1.setVisible(true);
+
+			System.out.print("1y");
+			
 		} else if (roll.get(0) == 2) {
-			dice1 = new JLabel("",diceFace2,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			aDice1.setVisible(false);
+			aDice3.setVisible(false);
+			aDice4.setVisible(false);
+			aDice5.setVisible(false);
+			aDice6.setVisible(false);
+			aDice2.setVisible(true);
+
+			System.out.print("2y");
+
 		} else if (roll.get(0) ==3) {
-			dice1 = new JLabel("",diceFace3,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			aDice1.setVisible(false);
+			aDice2.setVisible(false);
+			aDice4.setVisible(false);
+			aDice5.setVisible(false);
+			aDice6.setVisible(false);
+			aDice3.setVisible(true);
+
+			System.out.print("3y");
+
 		} else if (roll.get(0) ==4) {
-			dice1 = new JLabel("",diceFace4,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			aDice1.setVisible(false);
+			aDice2.setVisible(false);
+			aDice3.setVisible(false);
+			aDice5.setVisible(false);
+			aDice6.setVisible(false);
+			aDice4.setVisible(true);
+
+			System.out.print("4y");
+
 		} else if (roll.get(0) ==5) {
-			dice1 = new JLabel("",diceFace5,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			aDice1.setVisible(false);
+			aDice2.setVisible(false);
+			aDice3.setVisible(false);
+			aDice6.setVisible(false);
+			aDice4.setVisible(false);
+			aDice5.setVisible(true);
+			System.out.print("5y");
+
 		} else if (roll.get(0) ==6) {
-			dice1 = new JLabel("",diceFace6,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			aDice1.setVisible(false);
+			aDice2.setVisible(false);
+			aDice3.setVisible(false);
+			aDice5.setVisible(false);
+			aDice4.setVisible(false);
+			aDice6.setVisible(true);
+			System.out.print("6y");
 		} 
 		
 		if (roll.get(1) == 1) {
-			dice2 = new JLabel("",diceFace1,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			bDice6.setVisible(false);
+			bDice2.setVisible(false);
+			bDice3.setVisible(false);
+			bDice5.setVisible(false);
+			bDice4.setVisible(false);
+			bDice1.setVisible(true);
+			
+
 		} else if (roll.get(1) == 2) {
-			dice2 = new JLabel("",diceFace2,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			bDice6.setVisible(false);
+			bDice1.setVisible(false);
+			bDice3.setVisible(false);
+			bDice5.setVisible(false);
+			bDice4.setVisible(false);
+			bDice2.setVisible(true);
+			
+
 		} else if (roll.get(1) ==3) {
-			dice2 = new JLabel("",diceFace3,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			bDice6.setVisible(false);
+			bDice2.setVisible(false);
+			bDice1.setVisible(false);
+			bDice5.setVisible(false);
+			bDice4.setVisible(false);
+			bDice3.setVisible(true);
+			
+			
+
 		} else if (roll.get(1) ==4) {
-			dice2 = new JLabel("",diceFace4,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			bDice6.setVisible(false);
+			bDice2.setVisible(false);
+			bDice3.setVisible(false);
+			bDice5.setVisible(false);
+			bDice1.setVisible(false);
+			bDice4.setVisible(true);
+			
+			
+			
+			
+			
+
 		} else if (roll.get(1) ==5) {
-			dice2 = new JLabel("",diceFace5,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			bDice6.setVisible(false);
+			bDice2.setVisible(false);
+			bDice3.setVisible(false);
+			bDice1.setVisible(false);
+			bDice4.setVisible(false);
+			bDice5.setVisible(true);
+			
 		} else if (roll.get(1) ==6) {
-			dice2 = new JLabel("",diceFace6,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			bDice1.setVisible(false);
+			bDice2.setVisible(false);
+			bDice3.setVisible(false);
+			bDice5.setVisible(false);
+			bDice4.setVisible(false);
+			bDice6.setVisible(true);
+			
 		} 
 		
 		if (roll.get(2) == 1) {
-			dice3 = new JLabel("",diceFace1,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			cDice6.setVisible(false);
+			cDice2.setVisible(false);
+			cDice3.setVisible(false);
+			cDice5.setVisible(false);
+			cDice4.setVisible(false);
+			cDice1.setVisible(true);
+			
+			
+
 		} else if (roll.get(2) == 2) {
-			dice3 = new JLabel("",diceFace2,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			cDice6.setVisible(false);
+			cDice1.setVisible(false);
+			cDice3.setVisible(false);
+			cDice5.setVisible(false);
+			cDice4.setVisible(false);
+			cDice2.setVisible(true);
+			
+			
+
 		} else if (roll.get(2) ==3) {
-			dice3 = new JLabel("",diceFace3,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			cDice6.setVisible(false);
+			cDice2.setVisible(false);
+			cDice1.setVisible(false);
+			cDice5.setVisible(false);
+			cDice4.setVisible(false);
+			cDice3.setVisible(true);
+			
+
 		} else if (roll.get(2) ==4) {
-			dice3 = new JLabel("",diceFace4,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			cDice6.setVisible(false);
+			cDice2.setVisible(false);
+			cDice3.setVisible(false);
+			cDice5.setVisible(false);
+			cDice1.setVisible(false);
+			cDice4.setVisible(true);
+			
+
 		} else if (roll.get(2) ==5) {
-			dice3 = new JLabel("",diceFace5,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			cDice6.setVisible(false);
+			cDice2.setVisible(false);
+			cDice3.setVisible(false);
+			cDice1.setVisible(false);
+			cDice4.setVisible(false);
+			cDice5.setVisible(true);
+			
+			
+
 		} else if (roll.get(2) ==6) {
-			dice3 = new JLabel("",diceFace6,JLabel.CENTER);
-			frame.getContentPane().add(dice1);
+			cDice1.setVisible(false);
+			cDice2.setVisible(false);
+			cDice3.setVisible(false);
+			cDice5.setVisible(false);
+			cDice4.setVisible(false);
+			cDice6.setVisible(true);
+			
+			
+
 		} 
 		frame.setVisible(true);
-		dice1.setVisible(true);
-		dice2.setVisible(true);
-		dice3.setVisible(true);
+		
 		
 	}
 	
