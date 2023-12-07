@@ -39,12 +39,12 @@ public class GameWindow implements ActionListener{
 	private int[] playerIndex = {3,2,1,0};
 	private JLabel cpuBet1,cpuBet2,cpuBet3;
 	boolean sort = false;
-	ImageIcon diceFace1 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-one.png");
-	ImageIcon diceFace2 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-two.png");
-	ImageIcon diceFace3 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-three.png");
-	ImageIcon diceFace4 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-four.png");
-	ImageIcon diceFace5 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-five.png");
-	ImageIcon diceFace6 = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/dice-six-faces-six.png");
+	ImageIcon diceFace1 = new ImageIcon("rsc/dice-six-faces-one.png");
+	ImageIcon diceFace2 = new ImageIcon("rsc/dice-six-faces-two.png");
+	ImageIcon diceFace3 = new ImageIcon("rsc/dice-six-faces-three.png");
+	ImageIcon diceFace4 = new ImageIcon("rsc/dice-six-faces-four.png");
+	ImageIcon diceFace5 = new ImageIcon("rsc/dice-six-faces-five.png");
+	ImageIcon diceFace6 = new ImageIcon("rsc/dice-six-faces-six.png");
 	
 	private Player[] players = new Player[4];
 	private int[] scores = new int[4];
@@ -200,7 +200,7 @@ public class GameWindow implements ActionListener{
 		
 		
 		
-		ImageIcon backGround = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/CeeLo_table (1).jpg");
+		ImageIcon backGround = new ImageIcon("rsc/CeeLo_table (1).jpg");
 		background = new JLabel("",backGround,JLabel.CENTER);
 		background.setBackground(Color.BLACK);
 		background.setBounds(0,0, 1280,720);
@@ -226,9 +226,9 @@ public class GameWindow implements ActionListener{
 		lblPlayer_3.setText(players[playerIndex[1]].getName());
 		lblPlayer_4.setText(players[playerIndex[0]].getName());
 		
-		cpuBet1.setText(""+players[playerIndex[3]].getBet());
-		cpuBet2.setText(""+players[playerIndex[2]].getBet());
-		cpuBet3.setText(""+players[playerIndex[1]].getBet());
+		cpuBet1.setText(""+players[playerIndex[2]].getBet());
+		cpuBet2.setText(""+players[playerIndex[1]].getBet());
+		cpuBet3.setText(""+players[playerIndex[0]].getBet());
 		
 	}
 	
@@ -320,6 +320,10 @@ public class GameWindow implements ActionListener{
 			dice3 = new JLabel("",diceFace6,JLabel.CENTER);
 			frame.getContentPane().add(dice1);
 		} 
+		frame.setVisible(true);
+		dice1.setVisible(true);
+		dice2.setVisible(true);
+		dice3.setVisible(true);
 		
 	}
 	
@@ -332,8 +336,18 @@ public class GameWindow implements ActionListener{
 			}
 			disPlayBalance();
 			try {
-				startGame(theBet, playerIndex[3]);
-				disPlayBalance();
+				if (theBet > players[playerIndex[3]].getBalance()) {
+					JOptionPane.showMessageDialog(null,"Your bet is invalid!","Invalid Bet",JOptionPane.YES_OPTION);
+					playerBet.setText("0");
+				} else {
+					startGame(theBet, playerIndex[3]);
+					disPlayBalance();
+				}
+				if (players[0].getBalance() < 0 || players[1].getBalance() < 0 || players[2].getBalance() < 0 || players[3].getBalance() < 0) {
+					JOptionPane.showMessageDialog(null,"Game has ended! Someone lost all their money! ):","Game Ended!",JOptionPane.YES_OPTION);
+					frame.dispose();
+					LaunchPage home = new LaunchPage();
+				}
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -344,6 +358,13 @@ public class GameWindow implements ActionListener{
 			frame.dispose();
 		} else if (e.getSource()==btnBet) {
 			theBet = Integer.parseInt(playerBet.getText());
+			if (theBet > players[playerIndex[3]].getBalance()) {
+				JOptionPane.showMessageDialog(null,"Your bet is invalid!","Invalid Bet",JOptionPane.YES_OPTION);
+				playerBet.setText("0");
+				theBet = 0;
+			} else {
+				theBet = Integer.parseInt(playerBet.getText());
+			}
 			System.out.println(theBet);
 			
 		}
@@ -361,6 +382,7 @@ public class GameWindow implements ActionListener{
 							players[i].setBet(rand.nextInt((int) (players[i].getBalance()*0.5)));
 						}
 					}
+					disPlayBalance();
 				}
 			do {
 				roundEnd = false;
@@ -432,11 +454,6 @@ public class GameWindow implements ActionListener{
 			}
 			roundRoll(0);
 			displayDice(0);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			//Banker
 			if (scores[0] == 0 || scores[0] == 10 || scores[0] == 12 || scores[0] == 13 || scores[0] == 1) {
 				for (int i = 1; i < 4; i++) {
@@ -449,6 +466,11 @@ public class GameWindow implements ActionListener{
 					players[i].withdraw(players[i].getBet());
 				}
 			} else {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				roundRoll(1);
 				displayDice(1);
 				try {

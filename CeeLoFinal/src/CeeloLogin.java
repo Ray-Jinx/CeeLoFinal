@@ -50,7 +50,7 @@ public class CeeloLogin {
 		
 		
 		try {                
-         	BufferedImage imageTitle = ImageIO.read(new File("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/Ceelo_title.jpg"));
+         	BufferedImage imageTitle = ImageIO.read(new File("/rsc/Ceelo_title.jpg"));
 		 	frame.getContentPane().setLayout(null);
 		 	JLabel lblCeelo = new JLabel(new ImageIcon(imageTitle));
 		 	lblCeelo.setBounds(0, 0, 1280, 684);

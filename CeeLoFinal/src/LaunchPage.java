@@ -41,7 +41,7 @@ public class LaunchPage implements ActionListener{
 		frame.setSize(1280,720);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
-		ImageIcon backGround = new ImageIcon("/home/kevinren/Documents/CeeLoFinal/CeeLoFinal/rsc/Cee_LoTITLE (3).png");
+		ImageIcon backGround = new ImageIcon("rsc/Cee_LoTITLE (3).png"); 
 		background = new JLabel("",backGround,JLabel.CENTER);
 		background.setBounds(0,0, 1280,720);
 		frame.getContentPane().add(background);
