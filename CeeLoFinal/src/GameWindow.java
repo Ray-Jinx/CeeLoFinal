@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class GameWindow implements ActionListener{
 	
@@ -547,8 +548,8 @@ public class GameWindow implements ActionListener{
 			
 
 		} 
+		SwingUtilities.updateComponentTreeUI(frame);
 		frame.setVisible(true);
-		
 		
 	}
 	
@@ -567,6 +568,7 @@ public class GameWindow implements ActionListener{
 				} else {
 					startGame(theBet, playerIndex[3]);
 					disPlayBalance();
+					moveBank();
 				}
 				if (players[0].getBalance() < 0 || players[1].getBalance() < 0 || players[2].getBalance() < 0 || players[3].getBalance() < 0) {
 					JOptionPane.showMessageDialog(null,"Game has ended! Someone lost all their money! ):","Game Ended!",JOptionPane.YES_OPTION);
@@ -577,20 +579,21 @@ public class GameWindow implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			moveBank();
 		} else if (e.getSource()==btnHome) {
 			LaunchPage home = new LaunchPage();
 			frame.dispose();
 		} else if (e.getSource()==btnBet) {
-			theBet = Integer.parseInt(playerBet.getText());
-			if (theBet > players[playerIndex[3]].getBalance()) {
-				JOptionPane.showMessageDialog(null,"Your bet is invalid!","Invalid Bet",JOptionPane.YES_OPTION);
-				playerBet.setText("0");
-				theBet = 0;
-			} else {
+			try {
 				theBet = Integer.parseInt(playerBet.getText());
-			}
-			System.out.println(theBet);
+				if (theBet > players[playerIndex[3]].getBalance()) {
+					JOptionPane.showMessageDialog(null,"Your bet is invalid!","Invalid Bet",JOptionPane.YES_OPTION);
+					playerBet.setText("0");
+					theBet = 0;
+				} else {
+					theBet = Integer.parseInt(playerBet.getText());
+				}
+				System.out.println(theBet);
+			} catch (Exception e2) {}
 			
 		}
 		
@@ -610,9 +613,7 @@ public class GameWindow implements ActionListener{
 					disPlayBalance();
 				}
 			do {
-				roundEnd = false;
 				round();
-				roundEnd = true;
 				Player temp = players[0];
 				for (int i = 0; i < 3 ; i++) {
 					players[i] = players[i+1];
@@ -678,7 +679,8 @@ public class GameWindow implements ActionListener{
 				players[i].roll();
 			}
 			roundRoll(0);
-			displayDice(0);
+			displayDice(playerIndex[3]);
+			disPlayBalance();
 			//Banker
 			if (scores[0] == 0 || scores[0] == 10 || scores[0] == 12 || scores[0] == 13 || scores[0] == 1) {
 				for (int i = 1; i < 4; i++) {
@@ -697,21 +699,24 @@ public class GameWindow implements ActionListener{
 					e.printStackTrace();
 				}
 				roundRoll(1);
-				displayDice(1);
+				displayDice(playerIndex[2]);
+				disPlayBalance();
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				roundRoll(2);
-				displayDice(2);
+				displayDice(playerIndex[1]);
+				disPlayBalance();
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				roundRoll(3);
-				displayDice(3);
+				displayDice(playerIndex[0]);
+				disPlayBalance();
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
