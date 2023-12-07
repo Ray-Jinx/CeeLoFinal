@@ -230,14 +230,6 @@ public class GameWindow implements ActionListener{
 		cpuBet2.setText(""+players[playerIndex[2]].getBet());
 		cpuBet3.setText(""+players[playerIndex[1]].getBet());
 		
-		if (sort == true) {
-		int temp = playerIndex[0];
-		for (int i = 0; i < 3 ; i++) {
-			this.playerIndex[i] = this.playerIndex[i+1];
-		}
-		this.playerIndex[3] = temp;
-		}
-		sort = true;
 	}
 	
 	
@@ -340,7 +332,7 @@ public class GameWindow implements ActionListener{
 			}
 			disPlayBalance();
 			try {
-				startGame(theBet, playerIndex[1]);
+				startGame(theBet, playerIndex[3]);
 				disPlayBalance();
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
@@ -379,6 +371,12 @@ public class GameWindow implements ActionListener{
 					players[i] = players[i+1];
 				}
 				players[3] = temp;
+				
+				int temp2 = this.playerIndex[0];
+				for (int i = 0; i < 3 ; i++) {
+					this.playerIndex[i] = this.playerIndex[i+1];
+				}
+				this.playerIndex[3] = temp2;
 				/*
 				if (players[0].getBalance() > 0 && 
 					players[1].getBalance() > 0 && 
