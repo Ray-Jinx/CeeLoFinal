@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 public class LaunchPage implements ActionListener{
 	
 	JFrame frame = new JFrame();	
+	
 	JButton startButton = new JButton("Start Game");//Create buttons to start game
 	JButton howToButton = new JButton("How to Play");//Create button of how to play
 	Image backgroundImage;//Assign background image
@@ -53,6 +54,7 @@ public class LaunchPage implements ActionListener{
 
 		background = new JLabel("",backGround,JLabel.CENTER);//Set the background image to the JLabel
 		background.setBounds(0,0, 1280,720);
+		frame.setTitle("CeeLo");
 		frame.getContentPane().add(background);
 		
 	}

@@ -103,6 +103,7 @@ public class GameWindow /* implements ActionListener*/ implements ActionListener
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1280,720);
+		frame.setTitle("CeeLo");
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		
@@ -694,16 +695,6 @@ public class GameWindow /* implements ActionListener*/ implements ActionListener
 					this.playerIndex[i] = this.playerIndex[i+1];
 				}
 				this.playerIndex[3] = temp2;
-				/*
-				if (players[0].getBalance() > 0 && 
-					players[1].getBalance() > 0 && 
-					players[2].getBalance() > 0 && 
-					players[3].getBalance() > 0) {
-					for (int i = 1; i < 4; i++) {
-						players[i].setBet(rand.nextInt((int) (players[i].getBalance())));
-					}
-				}
-				*/
 				
 			} while (//Loop until someone loses their money
 					players[0].getBalance() > 0 && 
@@ -791,7 +782,7 @@ public class GameWindow /* implements ActionListener*/ implements ActionListener
 		 * 
 		 * 
 		 * 
-		 * @param boolea cont
+		 * @param boolean cont
 		 */
 		public void setContinueRoll(boolean cont) {
 			continueRoll = cont;//assign continueRoll with cont
@@ -817,7 +808,7 @@ public class GameWindow /* implements ActionListener*/ implements ActionListener
 			displayDice(playerIndex[3]);
 			disPlayBalance();
 			//Banker
-			if (scores[0] == 0 || scores[0] == 10 || scores[0] == 12 || scores[0] == 13 || scores[0] == 1) {//Checks instant winning condition
+			if (scores[0] == 0 || scores[0] == 10 || scores[0] == 12 || scores[0] == 13 || scores[0] == 1) {//Checks instant losing condition
 				for (int i = 1; i < 4; i++) {//Take away their money and give it to the winner
 					players[0].withdraw(players[i].getBet());
 					players[i].deposit(players[i].getBet());

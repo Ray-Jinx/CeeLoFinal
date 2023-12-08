@@ -26,6 +26,7 @@ public class HowToPlay/* implements ActionListener*/ implements ActionListener{
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1280,720);
+		frame.setTitle("How To Play");
 		frame.getContentPane().setLayout(null);
 		
 		JTextArea txtrHi = new JTextArea(); //Create Textare for the instruction/rules of the game
